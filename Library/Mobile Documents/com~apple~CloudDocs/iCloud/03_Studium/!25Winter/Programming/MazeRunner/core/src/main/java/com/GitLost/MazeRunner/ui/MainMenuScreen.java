@@ -44,7 +44,7 @@ public class MainMenuScreen implements Screen{
 
     @Override
     public void render(float v) {
-        ScreenUtils.clear(0.0f, 0.3f, 0.0f, 1.0f);
+        ScreenUtils.clear(0.0f, 0.3f, 0.0f, 1.0f); //color of screen
         stage.act(v);
         stage.draw();
     }
