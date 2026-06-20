@@ -17,16 +17,21 @@ import json
 # Required time complexity: O(n^2)
 def prefix_sum(A: list) -> int:
     n = len(A)
-    p = [0] * n
+    p = [0] * (n + 1)
     a = {(i,j):0 for i in range(n) for j in range(i,n)}
 
-    for i in range(1,n):
-        p[i] += A[i]
+    for i in range(n):
+        p[i+1] = p[i] + A[i]
+    
+    print(p)
 
     for i in range(n):
         for j in range(i,n):
-            k = 1 if j == i else (j - i)
-            a[(i,j)] = (1/math.sqrt(k)) * p[j-i]
+            k = j - i + 1
+            subarray_sum = p[j] - p[i]
+
+            print(f'k: {i,j}, sum: {subarray_sum}')
+            a[(i,j)] = subarray_sum / math.sqrt(k)
 
     
     return max(a.values())
@@ -35,5 +40,5 @@ def prefix_sum(A: list) -> int:
 
 
 if __name__ == '__main__':
-    A = [2, 6, 3, -4, 5, 5]
+    A = [-8, 2, -3, 9, 8, 7, -4, 1, -6]
     print(prefix_sum(A))
